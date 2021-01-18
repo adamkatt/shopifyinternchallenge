@@ -5,10 +5,6 @@
   <%= @shopifydb.treetype %>
 </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @shopifydb.price %>
-</p>
 <div>
 	<%= image_tag(@shopifydb.image) %>
 </div>
@@ -33,32 +29,16 @@
      },
      max_labels: 10
    }
+  tags = ""
   response = client.detect_labels attrs
   puts "Detected labels for: #{photo}"
   response.labels.each do |label|
-    puts "Label:      #{label.name}"
-    puts "Confidence: #{label.confidence}"
-    puts "Instances:"
-    label['instances'].each do |instance|
-      box = instance['bounding_box']
-      puts "  Bounding box:"
-      puts "    Top:        #{box.top}"
-      puts "    Left:       #{box.left}"
-      puts "    Width:      #{box.width}"
-      puts "    Height:     #{box.height}"
-      puts "  Confidence: #{instance.confidence}"
-    end
-    puts "Parents:"
-    label.parents.each do |parent|
-      puts "  #{parent.name}"
-    end
-    puts "------------"
-    puts ""
+    tags += label.name + ", "
   end%>
-  <% response %>
 </p>
 <p>
   <strong>tags:</strong>
+  <%  @shopifydb.update_column(:tags,tags) %>
   <%= @shopifydb.tags %>
 </p>
 

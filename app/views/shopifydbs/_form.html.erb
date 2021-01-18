@@ -16,26 +16,20 @@
     <%= form.text_field :treetype %>
   </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
-  </div>
   <div class="fields">
     <%= form.label :image %>
-    <%= form.file_field :image %>
+    <%= form.file_field :image%>
   </div>
   <div type="button" class="btn btn-primary">Make public? <%= form.check_box :location%></div>
-  
-  <div class="field">
-    <%= form.label :tags %>
-    <%= form.text_field :tags %>
-  </div>
+
+
 
   <div class="field">
     <%= form.number_field :user_id,id: :shopifydbs_user_id, class:"form-control", value: current_user.id, type: :hidden %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit%>
+  
   </div>
 <% end %>
