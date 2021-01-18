@@ -5,17 +5,15 @@ application up and running.
 
 Things you may want to cover:
 
-##Build With
-..* [Ruby on Rails](https://rubyonrails.org/)
-..* AWS S3(secure location for private images)
-..* AWS rekognition(for creating image tags)
-##gems
-..* aws-sdk
-..* image_processing v1.2
-..* devise
-
-
-..* Ruby on Rails
+## Built With ##
+* [Ruby on Rails](https://rubyonrails.org/)
+* [AWS](https://aws.amazon.com/?nc2=h_lg)
+* [SQLite3](https://www.sqlite.org/index.html)
+* [Boot Strap](https://getbootstrap.com/)
+## gems ##
+* aws-sdk
+* image_processing v1.2
+* devise
 
 * System dependencies
 
