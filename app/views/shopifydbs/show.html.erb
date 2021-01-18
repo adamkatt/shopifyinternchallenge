@@ -1,5 +1,9 @@
-<p id="notice"><%= notice %></p>
-
+<%unless notice.nil? %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong><%= notice %></strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<%end%>
 <p>
   <strong>Treetype:</strong>
   <%= @shopifydb.treetype %>
