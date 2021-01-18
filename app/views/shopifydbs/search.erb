@@ -1,18 +1,22 @@
 <h1>search results <h1>
-<table>
-  <tbody>
-    <% @shopifydbs.each do |shopifydb| %>
-      <% if shopifydb.user == current_user or shopifydb.location == "1"%>
-      <tr>
-        <td><%= shopifydb.treetype %></td>
-        <td style='width:100px; height:100px'><%= link_to image_tag(shopifydb.image)  %></td>
-        <td><%= link_to 'Show', shopifydb %></td>
-        <% if shopifydb.user == current_user %>
-        <td><%= link_to 'Edit', edit_shopifydb_path(shopifydb) %></td>
-        <td><%= link_to 'Destroy', shopifydb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+<div class="row">
+  
+      <% @shopifydbs.each do |shopifydb| %>
+        <% if shopifydb.user == current_user or shopifydb.location == "1"%>
+      <div class="column">
+        <div class="card">
+          <td><%= shopifydb.treetype %></td>
+
+          <div class="img__container"><%= link_to image_tag(shopifydb.image)  %></div>
+          <td><%= link_to 'Show', shopifydb %></td>
+          <% if shopifydb.user == current_user %>
+          <td><%= link_to 'Edit', edit_shopifydb_path(shopifydb) %></td>
+          <td><%= link_to 'Destroy', shopifydb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </div>
+        </div>
         <% end %>
-      </tr>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+  
+</div>
