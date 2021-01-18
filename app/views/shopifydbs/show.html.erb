@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Treetype:</strong>
+  <%= @shopifydb.treetype %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @shopifydb.price %>
+</p>
+<div>
+	<%= image_tag(@shopifydb.image) %>
+</div>
+
+<p>
+    <%   # Add to your Gemfile
+   # gem 'aws-sdk-rekognition'
+   require 'aws-sdk-rekognition'
+   credentials = Aws::Credentials.new(
+      Rails.application.credentials.dig(:aws, :access_key_id),
+      Rails.application.credentials.dig(:aws, :secret_access_key)
+   )
+   bucket = 'aws-image-repo-w-rekg' # the bucket name without s3://
+   photo  = @shopifydb.image.key # the name of file
+   client   = Aws::Rekognition::Client.new credentials: credentials,region: 'us-east-2'
+   attrs = {
+     image: {
+       s3_object: {
+         bucket: bucket,
+         name: photo
+       },
+     },
+     max_labels: 10
+   }
+  response = client.detect_labels attrs
+  puts "Detected labels for: #{photo}"
+  response.labels.each do |label|
+    puts "Label:      #{label.name}"
+    puts "Confidence: #{label.confidence}"
+    puts "Instances:"
+    label['instances'].each do |instance|
+      box = instance['bounding_box']
+      puts "  Bounding box:"
+      puts "    Top:        #{box.top}"
+      puts "    Left:       #{box.left}"
+      puts "    Width:      #{box.width}"
+      puts "    Height:     #{box.height}"
+      puts "  Confidence: #{instance.confidence}"
+    end
+    puts "Parents:"
+    label.parents.each do |parent|
+      puts "  #{parent.name}"
+    end
+    puts "------------"
+    puts ""
+  end%>
+  <% response %>
+</p>
+<p>
+  <strong>tags:</strong>
+  <%= @shopifydb.tags %>
+</p>
+
+<%= link_to 'Edit', edit_shopifydb_path(@shopifydb) %> |
+<%= link_to 'Back', shopifydbs_path %>

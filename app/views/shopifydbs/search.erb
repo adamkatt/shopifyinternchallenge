@@ -1,0 +1,19 @@
+<h1>search results <h1>
+
+<tbody>
+    <% @shopifydbs.each do |shopifydb| %>
+      <% if shopifydb.user == current_user or shopifydb.location == "1"%>
+      <tr>
+        <td><%= shopifydb.treetype %></td>
+        <td><%= shopifydb.price %></td>
+        <td><%= shopifydb.tags %></td>
+        <td style='width:100px; height:100px'><%= link_to image_tag(shopifydb.image,style:'width:100%')  %></td>
+        <td><%= link_to 'Show', shopifydb %></td>
+        <% if shopifydb.user == current_user %>
+        <td><%= link_to 'Edit', edit_shopifydb_path(shopifydb) %></td>
+        <td><%= link_to 'Destroy', shopifydb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
